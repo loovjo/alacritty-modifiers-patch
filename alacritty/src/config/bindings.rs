@@ -1214,6 +1214,8 @@ impl<'a> de::Deserialize<'a> for ModsWrapper {
                         "shift" => res.insert(ModifiersState::SHIFT),
                         "alt" | "option" => res.insert(ModifiersState::ALT),
                         "control" => res.insert(ModifiersState::CTRL),
+                        "lalt" => res.insert(ModifiersState::LALT),
+                        "ralt" => res.insert(ModifiersState::RALT),
                         "none" => (),
                         _ => return Err(E::invalid_value(Unexpected::Str(modifier), &self)),
                     }
