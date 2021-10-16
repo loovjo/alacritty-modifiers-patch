@@ -53,7 +53,7 @@ impl<T: Eq> Binding<T> {
         // the most likely item to fail so prioritizing it here allows more
         // checks to be short circuited.
         self.trigger == *input
-            && self.mods == mods
+            && self.mods.matches(mods)
             && mode.contains(self.mode)
             && !mode.intersects(self.notmode)
     }
@@ -61,7 +61,7 @@ impl<T: Eq> Binding<T> {
     #[inline]
     pub fn triggers_match(&self, binding: &Binding<T>) -> bool {
         // Check the binding's key and modifiers.
-        if self.trigger != binding.trigger || self.mods != binding.mods {
+        if self.trigger != binding.trigger || !binding.mods.matches(self.mods) {
             return false;
         }
 
@@ -1216,6 +1216,12 @@ impl<'a> de::Deserialize<'a> for ModsWrapper {
                         "control" => res.insert(ModifiersState::CTRL),
                         "lalt" => res.insert(ModifiersState::LALT),
                         "ralt" => res.insert(ModifiersState::RALT),
+                        "lcontrol" => res.insert(ModifiersState::LCTRL),
+                        "rcontrol" => res.insert(ModifiersState::RCTRL),
+                        "lshift" => res.insert(ModifiersState::LSHIFT),
+                        "rshift" => res.insert(ModifiersState::RSHIFT),
+                        "lsuper" => res.insert(ModifiersState::LLOGO),
+                        "rsuper" => res.insert(ModifiersState::RLOGO),
                         "none" => (),
                         _ => return Err(E::invalid_value(Unexpected::Str(modifier), &self)),
                     }
