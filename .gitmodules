@@ -1,0 +1,6 @@
+[submodule "winit"]
+	path = winit
+	url = https://github.com/loovjo/winit-modifiers-patch
+[submodule "core-foundation-rs"]
+	path = core-foundation-rs
+	url = https://github.com/loovjo/core-foundation-rs-modifiers-patch
