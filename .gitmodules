@@ -1,0 +1,3 @@
+[submodule "winit"]
+	path = winit
+	url = git@github.com:loovjo/winit-modifiers-patch.git
